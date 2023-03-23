@@ -55,28 +55,28 @@ resource "aws_security_group" "web-server" {
 }
 
 #RDS SECURITY GROUP
-#resource "aws_security_group" "rds" {
-#  name        = "rdssg"
-#  vpc_id      = var.vpc
-#  description = "Allow mysql 3306 traffic"
+resource "aws_security_group" "rds" {
+  name        = "rdssg"
+  vpc_id      = var.vpc
+  description = "Allow mysql 3306 traffic"
 
-#  ingress {
-#    from_port       = 3306
-#    to_port         = 3306
-#    protocol        = "tcp"
-#    security_groups = [aws_security_group.web-server.id, aws_security_group.image-sg.id]
-#  }
+  ingress {
+    from_port       = 3306
+    to_port         = 3306
+    protocol        = "tcp"
+    security_groups = [aws_security_group.web-server.id, aws_security_group.image-sg.id]
+  }
 
-#  egress {
-#    from_port   = 0
-#    to_port     = 0
-#    protocol    = "-1"
-#    cidr_blocks = ["0.0.0.0/0"]
-#  }
-#  tags = {
-#    Name = "RDS sg"
-#  }
-#}
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  tags = {
+    Name = "RDS sg"
+  }
+}
 
 # image SECURITY GROUP
 resource "aws_security_group" "image-sg" {
